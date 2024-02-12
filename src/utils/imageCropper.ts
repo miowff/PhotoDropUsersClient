@@ -3,7 +3,7 @@ import { Area } from "react-easy-crop";
 export const createCroppedImage = async (
   file: File,
   area: Area
-): Promise<File> => {
+): Promise<File | undefined> => {
   try {
     const image = new Image();
     const reader = new FileReader();

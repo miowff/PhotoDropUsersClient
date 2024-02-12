@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { UserModel } from "../../../../backend/src/models/user";
+import { UserModel } from "../../models/user";
 
 interface AuthState {
   user: UserModel | null;
