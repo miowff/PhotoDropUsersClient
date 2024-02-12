@@ -85,8 +85,8 @@ export const SelfieEditPopUp = ({
       setIsSelfieUploading(true);
       if (currentPic && typeof currentPic !== "string") {
         const croppedPic = await createCroppedImage(currentPic, cropArea);
-       
-        const { name: fileName, type } = croppedPic;
+
+        const { name: fileName, type } = croppedPic as File;
         const { url: preSignedUrl, accessUrl } = await getUploadProfilePicUrl({
           fileName,
           type,
