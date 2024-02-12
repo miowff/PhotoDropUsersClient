@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSetFullNameMutation } from "../../../api/user";
-import { SetFullName } from "../../../../../backend/src/models/user";
 import { isErrorWithMessage } from "../../../utils/errorParser";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +8,7 @@ import { setUser } from "../../../redux/user/authSlice";
 import { useEnterKeyHandler } from "../../../hooks/useEnterKeyHandler";
 import { Alert, AlertData } from "../../Alert";
 import { useAuth } from "../../../hooks/useAuth";
+import { SetFullName } from "../../../models/user";
 
 export const WhatsYourName = () => {
   const navigate = useNavigate();

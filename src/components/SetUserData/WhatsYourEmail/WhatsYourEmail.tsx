@@ -3,12 +3,12 @@ import { useSetEmailMutation } from "../../../api/user";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { useNavigate } from "react-router-dom";
-import { SetEmail } from "../../../../../backend/src/models/user";
 import { setUser } from "../../../redux/user/authSlice";
 import { isErrorWithMessage } from "../../../utils/errorParser";
 import { useEnterKeyHandler } from "../../../hooks/useEnterKeyHandler";
 import { Alert, AlertData } from "../../Alert";
 import { useAuth } from "../../../hooks/useAuth";
+import { SetEmail } from "../../../models/user";
 type WhatsYourEmailProps = {
   fullName: string;
 };

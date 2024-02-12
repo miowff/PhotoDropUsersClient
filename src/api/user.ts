@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import {
-  UploadProfilePicUrlResponse,
-  RequestUploadPhotoUrl,
-  SetEmail,
-  SetFullName,
-} from "../../../backend/src/models/user";
+
+import { RequestUploadPhotoUrl, SetEmail, SetFullName, UploadProfilePicUrlResponse } from "../models/user";
 import { apiSlice } from "./api";
 
 const apiWithTags = apiSlice.enhanceEndpoints({ addTagTypes: ["User"] });

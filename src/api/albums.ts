@@ -1,8 +1,6 @@
-import {
-  AlbumModel,
-  AlbumWithPhotos,
-} from "../../../backend/src/models/albums";
-import { PaymentUrlResponse } from "../../../backend/src/models/payments";
+
+import { AlbumModel, AlbumWithPhotos } from "../models/albums";
+import { PaymentUrlResponse } from "../models/payments";
 import { apiSlice } from "./api";
 
 export const albumsApi = apiSlice.injectEndpoints({

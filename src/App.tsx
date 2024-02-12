@@ -2,9 +2,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useLazyGetCurrentUserQuery } from "./api/auth";
-import { UserModel } from "../../backend/src/models/user";
 import { setUser } from "./redux/user/authSlice";
 import { AppRoutes } from "./components/Routes";
+import { UserModel } from "./models/user";
 
 const App = () => {
   const [getUser] = useLazyGetCurrentUserQuery();

@@ -8,9 +8,9 @@ import {
 import { RootState } from "../redux/store";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../enums/constants";
 import { logOut, setToken } from "../redux/user/authSlice";
-import { TokensResponse } from "../../../backend/src/models/tokensResponse";
 import { removeTokens } from "../utils/removeTokens";
 import { setTokens } from "../utils/setTokens";
+import { TokensResponse } from "../models/tokensResponse";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "https://2orh1m3spg.execute-api.us-east-1.amazonaws.com",

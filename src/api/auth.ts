@@ -1,12 +1,7 @@
-import {
-  RefreshTokens,
-  TokensResponse,
-} from "../../../backend/src/models/tokensResponse";
-import {
-  AuthResponse,
-  LoginRegistrationModel,
-  UserModel,
-} from "../../../backend/src/models/user";
+
+
+import { RefreshTokens, TokensResponse } from "../models/tokensResponse";
+import { AuthResponse, LoginRegistrationModel, UserModel } from "../models/user";
 import { apiSlice } from "./api";
 
 export const authApi = apiSlice.injectEndpoints({

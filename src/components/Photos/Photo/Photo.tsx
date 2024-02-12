@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { PhotoResponse } from "../../../../../backend/src/models/photo";
+import { PhotoResponse } from "../../../models/photo";
+
 
 interface PhotoProps {
   photo: PhotoResponse;

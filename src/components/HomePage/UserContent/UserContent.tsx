@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Album } from "../Album/Album";
-import { AlbumModel } from "../../../../../backend/src/models/albums";
-import { PhotoResponse } from "../../../../../backend/src/models/photo";
 import { PopUpPhoto } from "../../Photos/PopUpPhoto/PopUpPhoto";
 import { usePreventVerticalScroll } from "../../../hooks/useHorizontalScroll";
 import { handleScroll } from "../../../hooks/useHandleHorizontalScroll";
 import { PhotosGroup } from "../../Photos/PhotosGroup/PhotosGroup";
+import { AlbumModel } from "../../../models/albums";
+import { PhotoResponse } from "../../../models/photo";
 
 interface UserContentProps {
   albums: AlbumModel[];

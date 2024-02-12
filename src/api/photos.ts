@@ -1,4 +1,4 @@
-import { PhotoResponse } from "../../../backend/src/models/photo";
+import { PhotoResponse } from "../models/photo";
 import { apiSlice } from "./api";
 
 export const photosApi = apiSlice.injectEndpoints({

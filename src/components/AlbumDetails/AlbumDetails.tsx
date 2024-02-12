@@ -2,11 +2,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useGetAlbumWithPhotosQuery } from "../../api/albums";
 import { Loader } from "../../components/Loader/Loader";
 import { useEffect, useState } from "react";
-import { PhotoResponse } from "../../../../backend/src/models/photo";
 import { PhotosGroup } from "../../components/Photos/PhotosGroup/PhotosGroup";
 import { PopUpPhoto } from "../../components/Photos/PopUpPhoto/PopUpPhoto";
 import { Footer } from "../../components/Footer/Footer";
 import { PaymentPopUp } from "../PaymentPopUp/PaymentPopUp";
+import { PhotoResponse } from "../../models/photo";
 
 export const AlbumDetails = () => {
   const { id } = useParams();

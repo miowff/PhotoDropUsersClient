@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { PhotoButtonsGroup } from "../PhotoButtonsGroup/PhotoButtonsGroup";
-import { PhotoResponse } from "../../../../../backend/src/models/photo";
 import { PaymentPopUp } from "../../PaymentPopUp/PaymentPopUp";
 import { Alert, AlertData } from "../../Alert";
-import { PhotoExample } from "../../../models/photo";
+import { PhotoExample, PhotoResponse } from "../../../models/photo";
 
 interface PopUpPhotoProps {
   photo: PhotoResponse | PhotoExample;

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { LoginRegistrationModel } from "../../../../../backend/src/models/user";
 import { useLoginOrRegisterMutation } from "../../../api/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import { setToken, setUser } from "../../../redux/user/authSlice";
@@ -9,6 +8,7 @@ import { useResendCode } from "../../../hooks/useResendCode";
 import { InputOtp } from "../OtpInput/OtpInput";
 import { Alert, AlertData } from "../../Alert";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { LoginRegistrationModel } from "../../../models/user";
 export const WhatsTheCode = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();

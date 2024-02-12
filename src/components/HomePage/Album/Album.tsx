@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { AlbumModel } from "../../../../../backend/src/models/albums";
 import { useState } from "react";
+import { AlbumModel } from "../../../models/albums";
 
 interface AlbumProps {
   album: AlbumModel;

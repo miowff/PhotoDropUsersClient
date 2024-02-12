@@ -3,10 +3,9 @@ import ChaseBaker from "../../../public/images/ArtistsPrints/ChaseBaker.jpg";
 import JorgeGardner from "../../../public/images/ArtistsPrints/JorgeGardner.jpg";
 import { useState } from "react";
 import { PopUpPhoto } from "../../Photos/PopUpPhoto/PopUpPhoto";
-import { PhotoResponse } from "../../../../../backend/src/models/photo";
 import { usePreventVerticalScroll } from "../../../hooks/useHorizontalScroll";
 import { handleScroll } from "../../../hooks/useHandleHorizontalScroll";
-import { PhotoExample } from "../../../models/photo";
+import { PhotoExample, PhotoResponse } from "../../../models/photo";
 
 export const NoPhotosYet = () => {
   const [photo, setPhoto] = useState<PhotoResponse | PhotoExample | null>(null);
