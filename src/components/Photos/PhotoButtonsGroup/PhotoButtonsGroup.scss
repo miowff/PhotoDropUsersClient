@@ -1,0 +1,33 @@
+.photo-buttons-group {
+    position: inherit;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    font-family: FuturaPtDefault;
+    height: 50px;
+
+    img {
+        margin: 0 auto;
+    }
+
+    p {
+        color: white;
+        font-size: 14px;
+
+    }
+    span {
+        cursor: pointer;
+    }
+
+}
+
+@media (max-width:1024px) {
+    .photo-buttons-group {
+        &__see-in-frame {
+            font-size: 18px;
+            width: 196px;
+        }
+    }
+}

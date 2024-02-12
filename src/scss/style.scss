@@ -1,0 +1,212 @@
+@import 'vars';
+@import 'fonts';
+@import 'reset';
+@import 'global';
+@import '../components/HomePage/Album/Album.scss';
+@import '../components/HomePage/NoPhotosYet/NoPhotosYet.scss';
+@import '../components/HomePage/UserContent/UserContent.scss';
+@import '../components/LetsGetStarted/NumberInput/NumberInput.scss';
+@import '../components/LetsGetStarted/OtpInput/OtpInput.scss';
+@import '../components/LetsGetStarted/WhatsTheCode/WhatsTheCode.scss';
+@import '../components/Photos/Photo/Photo.scss';
+@import '../components/Photos/PhotoButtonsGroup/PhotoButtonsGroup.scss';
+@import '../components/Photos/PhotosGroup/PhotosGroup.scss';
+@import '../components/Photos/PopUpPhoto/PopUpPhoto.scss';
+@import '../components/SetUserData/AddASelfie/AddAselfie.scss';
+@import '../components/SetUserData/SelfieEditPopUp/SelfieEditPopUp.scss';
+@import '../components/SetUserData/UploadSelfieOptionsPopup/UploadSelfieOptionsPopup.scss';
+@import '../components/SetUserData/WhatsYourEmail/WhatsYourEmail.scss';
+@import '../components/SetUserData/WhatsYourName/WhatsYourName.scss';
+@import '../components/Footer/Footer.scss';
+@import '../components/Header/Header.scss';
+@import '../components/Loader/Loader.scss';
+@import '../components/AlbumDetails/AlbumDetails.scss';
+@import '../components/ProfileDetails/ProfileDetails.scss';
+@import '../components/PaymentSuccess/PaymentSuccess.scss';
+@import '../components/PaymentPopUp/PaymentPopUp.scss';
+@import '../components/PrivacyPolicy/PrivacyPolicy.scss';
+@import '../components/TermsOfUse/TermsOfUse.scss';
+
+.container-with-bg {
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 110;
+    flex-direction: column;
+}
+
+.alert {
+    text-align: center;
+    color: white;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: 130px;
+    width: 350px;
+
+    div {
+        opacity: 0;
+        animation: fadeInOut 2s ease-in-out;
+        border-radius: 11px;
+    }
+
+    @keyframes fadeInOut {
+        0% {
+            opacity: 0;
+        }
+
+        25% {
+            opacity: 1;
+        }
+
+        75% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+    &__success {
+        background-color: green;
+    }
+
+    &__error {
+        background-color: red;
+    }
+
+    &__text {
+        color: white;
+        font-family: FuturaPtDefault;
+    }
+}
+
+.default-bold-text {
+    font-family: FuturaPtHeavy;
+    font-size: 18px;
+    line-height: 13px;
+}
+
+@media (max-width:1024px) {
+    .default-bold-text {
+        width: 345px;
+        font-size: 14px;
+    }
+}
+
+.default-button {
+    width: 420px;
+    height: 50px;
+    background-color: #30C;
+    color: #FFF;
+    font-family: FuturaPtMedium;
+    border: none;
+    font-size: 22px;
+    line-height: 15px;
+    border-radius: 30px;
+    cursor: pointer;
+
+    &:disabled {
+        opacity: 0.3;
+    }
+}
+
+@media (max-width:1024px) {
+    .default-button {
+        width: 345px;
+        font-size: 18px;
+    }
+}
+
+.default-text {
+    color: #262626;
+    font-family: FuturaPtDefault;
+    font-size: 18px;
+    line-height: normal;
+
+}
+
+@media (max-width:1024px) {
+    .default-text {
+        font-size: 16px;
+    }
+}
+
+.default-input {
+    width: 420px;
+    height: 40px;
+    border: none;
+    font-family: FuturaPtMedium;
+    color: #262626;
+    font-size: 20px;
+    padding-left: 13px;
+}
+
+@media (max-width:1024px) {
+    .default-input {
+        max-width: 345px;
+        font-size: 16px;
+    }
+
+}
+
+.default-title {
+    color: #262626;
+    font-family: TerminaBold, FuturaPtDemi;
+    font-size: 30px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+@media (max-width:1024px) {
+    .default-title {
+        max-width: 288px;
+        font-size: 22px;
+    }
+}
+
+.loading {
+    text-align: center;
+    width: 375px;
+
+    @keyframes dotty {
+        0% {
+            content: '...';
+        }
+
+        25% {
+            content: '..';
+        }
+
+        50% {
+            content: '.';
+        }
+
+        75% {
+            content: '...';
+        }
+
+        100% {
+            content: '';
+        }
+    }
+
+    p::after {
+        display: inline-block;
+        animation: dotty steps(1, end) 2s infinite;
+        content: '';
+    }
+}
+
+.photo-upload-options {
+    display: none;
+}
