@@ -7,7 +7,6 @@ import { setUser } from "../../../redux/user/authSlice";
 import { isErrorWithMessage } from "../../../utils/errorParser";
 import { useEnterKeyHandler } from "../../../hooks/useEnterKeyHandler";
 import { Alert, AlertData } from "../../Alert";
-import { useAuth } from "../../../hooks/useAuth";
 import { UserModel } from "../../../models/user";
 
 type WhatsYourEmailProps = {
@@ -26,7 +25,6 @@ export const WhatsYourEmail = ({ fullName }: WhatsYourEmailProps) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(
     email.length === 0
   );
-  const isAuth = useAuth();
   const setEmailRequest = async (email: string) => {
     try {
       await setUserEmail(email).unwrap();
@@ -38,10 +36,12 @@ export const WhatsYourEmail = ({ fullName }: WhatsYourEmailProps) => {
             email: email,
           },
         };
-        dispatch(setUser(updatedUser));
-      }
-      if (isAuth) {
-        return navigate("/me");
+        if (user.client.email) {
+          dispatch(setUser(updatedUser));
+          return navigate("/me");
+        } else {
+          dispatch(setUser(updatedUser));
+        }
       }
       return navigate("/");
     } catch (err) {

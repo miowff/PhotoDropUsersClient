@@ -7,14 +7,12 @@ import { RootState } from "../../../redux/store";
 import { setUser } from "../../../redux/user/authSlice";
 import { useEnterKeyHandler } from "../../../hooks/useEnterKeyHandler";
 import { Alert, AlertData } from "../../Alert";
-import { useAuth } from "../../../hooks/useAuth";
 import { UserModel } from "../../../models/user";
 
 export const WhatsYourName = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth.user);
-  const isAuth = useAuth();
   const [name, setName] = useState<string>("");
   const [alert, setAlert] = useState<AlertData | null>(null);
   const [setFullNameRequest] = useSetFullNameMutation();
@@ -35,10 +33,12 @@ export const WhatsYourName = () => {
             name: newName,
           },
         };
-        dispatch(setUser(updatedUser));
-      }
-      if (isAuth) {
-        return navigate("/me");
+        if (user.client.email) {
+          dispatch(setUser(updatedUser));
+          return navigate("/me");
+        } else {
+          dispatch(setUser(updatedUser));
+        }
       }
       return navigate("/");
     } catch (err) {

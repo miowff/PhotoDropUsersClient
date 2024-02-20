@@ -16,7 +16,6 @@ const App = () => {
       .unwrap()
       .then((data: UserModel) => {
         if (data) {
-          console.log(data);
           dispatch(setUser(data));
           if (location.pathname === "/start") {
             return navigate("/");
