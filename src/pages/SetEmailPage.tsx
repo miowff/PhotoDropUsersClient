@@ -8,11 +8,11 @@ export const SetEmailPage = () => {
   if (!user) {
     return <>User not found</>;
   }
-  const { fullName } = user;
+  const { name } = user.client;
   return (
     <>
       <Header />
-      <WhatsYourEmail fullName={fullName as unknown as string} />
+      <WhatsYourEmail fullName={name as unknown as string} />
     </>
   );
 };
