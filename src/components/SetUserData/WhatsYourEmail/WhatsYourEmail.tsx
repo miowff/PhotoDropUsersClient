@@ -8,7 +8,8 @@ import { isErrorWithMessage } from "../../../utils/errorParser";
 import { useEnterKeyHandler } from "../../../hooks/useEnterKeyHandler";
 import { Alert, AlertData } from "../../Alert";
 import { useAuth } from "../../../hooks/useAuth";
-import { SetEmail } from "../../../models/user";
+import { UserModel } from "../../../models/user";
+
 type WhatsYourEmailProps = {
   fullName: string;
 };
@@ -26,13 +27,16 @@ export const WhatsYourEmail = ({ fullName }: WhatsYourEmailProps) => {
     email.length === 0
   );
   const isAuth = useAuth();
-  const setEmailRequest = async (request: SetEmail) => {
+  const setEmailRequest = async (email: string) => {
     try {
-      const newEmail = await setUserEmail(request).unwrap();
+      await setUserEmail(email).unwrap();
       if (user) {
-        const updatedUser = {
+        const updatedUser: UserModel = {
           ...user,
-          email: newEmail,
+          client: {
+            ...user.client,
+            email: email,
+          },
         };
         dispatch(setUser(updatedUser));
       }
@@ -41,6 +45,7 @@ export const WhatsYourEmail = ({ fullName }: WhatsYourEmailProps) => {
       }
       return navigate("/");
     } catch (err) {
+      console.log(err);
       const error = isErrorWithMessage(err);
       if (error) {
         const { message } = err;
@@ -55,7 +60,7 @@ export const WhatsYourEmail = ({ fullName }: WhatsYourEmailProps) => {
   }, [email]);
   useEnterKeyHandler(async () => {
     setIsButtonDisabled(true);
-    await setEmailRequest({ email });
+    await setEmailRequest(email);
     setIsButtonDisabled(false);
   });
   return (
@@ -85,7 +90,7 @@ export const WhatsYourEmail = ({ fullName }: WhatsYourEmailProps) => {
                 className="default-button"
                 disabled={isButtonDisabled}
                 onClick={async () => {
-                  await setEmailRequest({ email });
+                  await setEmailRequest(email);
                 }}
               >
                 See your photos!

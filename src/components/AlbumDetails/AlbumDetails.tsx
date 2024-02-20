@@ -7,6 +7,7 @@ import { PopUpPhoto } from "../../components/Photos/PopUpPhoto/PopUpPhoto";
 import { Footer } from "../../components/Footer/Footer";
 import { PaymentPopUp } from "../PaymentPopUp/PaymentPopUp";
 import { PhotoResponse } from "../../models/photo";
+import dayjs from "dayjs";
 
 export const AlbumDetails = () => {
   const { id } = useParams();
@@ -24,13 +25,14 @@ export const AlbumDetails = () => {
   const [isActivated, setIsActivated] = useState<boolean>(false);
   useEffect(() => {
     if (data) {
-      const { photos, title, createdDate, isActivated } = data;
-      setPhotos(photos);
-      setAlbumTitle(title);
-      setCreatedDate(createdDate);
-      setIsActivated(isActivated);
+      const { album, images } = data;
+      setPhotos(images);
+      setAlbumTitle(album.name);
+      setCreatedDate(dayjs(album.date).format("MMM DD, YYYY"));
+      setIsActivated(album.paid);
+      console.log(album);
     }
-  }, [data]);
+  }, [data, setCreatedDate]);
   return (
     <>
       {isFetching || isLoading || !photos ? (
@@ -40,6 +42,7 @@ export const AlbumDetails = () => {
           <section className="album-details">
             {isPopUpPhotoVisible && (
               <PopUpPhoto
+                albumTitle={albumTitle}
                 photo={photo as PhotoResponse}
                 setPopUpPhotoVisible={setPopUpPhotoVisible}
               />

@@ -17,6 +17,7 @@ export function HomePage() {
     isLoading: isPhotosLoading,
     isFetching: isPhotosFetching,
   } = useGetAllUserPhotosQuery();
+
   return (
     <>
       {isAlbumsFetching ||

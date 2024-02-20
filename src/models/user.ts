@@ -1,14 +1,18 @@
 import { TokensResponse } from "./tokensResponse";
 
 export interface LoginRegistrationModel {
-  phoneNumber: string;
+  number: string;
   code: string;
 }
 
 export interface UserModel {
-  email: string | null;
-  fullName: string | null;
-  profilePhotoLink: string | null;
+  client: {
+    number: string;
+    id: number;
+    selfieUrl: string;
+    name: string;
+    email: string;
+  };
 }
 export interface AuthResponse {
   tokens: TokensResponse;
@@ -21,12 +25,7 @@ export interface SetEmail {
   email: string;
 }
 export interface RequestUploadPhotoUrl {
-  fileName: string;
-  type: string;
-}
-interface PresignedUrl {
-  url: string;
-  fields: Fields;
+  contentType: string;
 }
 
 interface Fields {
@@ -42,7 +41,10 @@ interface Fields {
 }
 
 export interface UploadProfilePicUrlResponse {
-  url: PresignedUrl;
+  post: {
+    url: string;
+    fields: Fields;
+  };
   accessUrl: string;
 }
 

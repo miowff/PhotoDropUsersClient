@@ -13,6 +13,7 @@ import { Alert, AlertData } from "../../Alert";
 import { useEnterKeyHandler } from "../../../hooks/useEnterKeyHandler";
 import Cropper, { Area } from "react-easy-crop";
 import { createCroppedImage } from "../../../utils/imageCropper";
+import { UserModel } from "../../../models/user";
 interface SelfieEditProps {
   currentPic: string | File | null;
   setSelectedFile: React.Dispatch<React.SetStateAction<string | File>>;
@@ -31,11 +32,9 @@ export const SelfieEditPopUp = ({
   const user = useSelector((state: RootState) => state.auth.user);
   const [getUploadProfilePicUrl] = useLazyGetUploadProfilePicUrlQuery();
   const { pathname } = useLocation();
-
   const retakeButtonRef = useRef<HTMLButtonElement>(null);
   const selfieEditAreaRef = useRef<HTMLDivElement>(null);
   const photoUploadOptionsRef = useRef<HTMLInputElement>(null);
-
   const [alert, setAlert] = useState<AlertData | null>(null);
   const [isSelfieUploading, setIsSelfieUploading] = useState<boolean>(false);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -86,12 +85,11 @@ export const SelfieEditPopUp = ({
       if (currentPic && typeof currentPic !== "string") {
         const croppedPic = await createCroppedImage(currentPic, cropArea);
 
-        const { name: fileName, type } = croppedPic as File;
-        const { url: preSignedUrl, accessUrl } = await getUploadProfilePicUrl({
-          fileName,
-          type,
+        const { type } = croppedPic as File;
+        const { post, accessUrl } = await getUploadProfilePicUrl({
+          contentType: type,
         }).unwrap();
-        const { url, fields } = preSignedUrl;
+        const { url, fields } = post;
         const formData = new FormData();
         for (const [key, value] of Object.entries(fields)) {
           formData.append(key, value);
@@ -101,11 +99,14 @@ export const SelfieEditPopUp = ({
           headers: { "Content-Type": "multipart/form-data" },
         });
         if (user) {
-          const updatedUser = {
+          const updatedUser: UserModel = {
             ...user,
-            profilePhotoLink: accessUrl,
+            client: {
+              ...user.client,
+              selfieUrl: accessUrl,
+            },
           };
-          setSelectedFile(updatedUser.profilePhotoLink);
+          setSelectedFile(updatedUser.client.selfieUrl);
           dispatch(setUser(updatedUser));
         }
       }

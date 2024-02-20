@@ -1,4 +1,3 @@
-
 import { PhotoResponse } from "../../../models/photo";
 import { Photo } from "../Photo/Photo";
 

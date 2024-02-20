@@ -20,12 +20,12 @@ export const ProfileDetails = () => {
   const [profilePhoto, setProfilePhoto] = useState<string>(NoProfilePicture);
   useEffect(() => {
     if (user) {
-      const { fullName, email, profilePhotoLink } = user;
-      setFullName(fullName);
+      const { email, name, selfieUrl } = user.client;
+      setFullName(name);
       setEmail(email);
-      if (profilePhotoLink) {
-        setCurrentPic(profilePhotoLink);
-        setProfilePhoto(profilePhotoLink);
+      if (selfieUrl) {
+        setCurrentPic(selfieUrl);
+        setProfilePhoto(selfieUrl);
       }
     }
   }, [user]);

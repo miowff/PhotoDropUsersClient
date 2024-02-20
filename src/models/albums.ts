@@ -1,14 +1,27 @@
 import { PhotoResponse } from "./photo";
 
 export interface AlbumModel {
-  albumId: string;
-  title: string;
-  previewPhotoLink: string;
-  previewBase64: string;
+  paid: boolean;
+  name: string;
+  date: string;
+  id: number;
+  location: string;
+}
+export interface AlbumDetails {
+  album: {
+    date: string;
+    id: number;
+    name: string;
+    location: string;
+    photographerId: number;
+    paid: boolean;
+  };
+  image: {
+    url: string;
+    preview: string;
+  };
 }
 export interface AlbumWithPhotos {
-  title: string;
-  createdDate: string;
-  isActivated: boolean;
-  photos: PhotoResponse[];
+  album: AlbumModel;
+  images: PhotoResponse[];
 }

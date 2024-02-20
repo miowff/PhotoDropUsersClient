@@ -15,11 +15,13 @@ interface UserContentProps {
 export const UserContent = ({ albums, photos }: UserContentProps) => {
   const [photo, setPhoto] = useState<PhotoResponse | null>(null);
   const [isPopUpPhotoVisible, setPopUpPhotoVisible] = useState<boolean>(false);
+
   usePreventVerticalScroll(".album");
   return (
     <section className="user-content">
       {isPopUpPhotoVisible && (
         <PopUpPhoto
+          albumTitle={"ToDo:album name"}
           photo={photo as PhotoResponse}
           setPopUpPhotoVisible={setPopUpPhotoVisible}
         />
@@ -33,7 +35,18 @@ export const UserContent = ({ albums, photos }: UserContentProps) => {
               onWheel={(event) => handleScroll(event)}
             >
               {albums.map((album, index) => {
-                return <Album album={album} key={index} />;
+                const preview = photos.find((photo) => {
+                  if (photo.albumId === album.id) {
+                    return photo;
+                  }
+                });
+                return (
+                  <Album
+                    album={album}
+                    preview={preview as PhotoResponse}
+                    key={index}
+                  />
+                );
               })}
             </div>
           </div>

@@ -21,9 +21,12 @@ export const PaymentPopUp = ({
   });
   const createPaymentIntent = async () => {
     setIsUrlCreating(true);
-    const url = await getPaymentUrl(albumId).unwrap();
+    const { url } = await getPaymentUrl({
+      albumId,
+      albumName: albumTitle,
+    }).unwrap();
     setIsUrlCreating(false);
-    window.location.href = url.paymentUrl;
+    window.location.href = url;
   };
   return (
     <div className="payment-pop-up container-with-bg">

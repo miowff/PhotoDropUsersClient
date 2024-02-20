@@ -3,6 +3,7 @@ import { useAuth } from "../hooks/useAuth";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { RootState } from "../redux/store";
+import { ACCESS_TOKEN_KEY } from "../enums/constants";
 
 export const PrivateWrapper = ({ children }: { children: JSX.Element }) => {
   const isAuth = useAuth();
@@ -11,10 +12,10 @@ export const PrivateWrapper = ({ children }: { children: JSX.Element }) => {
 
   useEffect(() => {
     if (user) {
-      const { email, fullName, profilePhotoLink } = user;
-      if (profilePhotoLink === null) {
+      const { email, name, selfieUrl } = user.client;
+      if (selfieUrl === null) {
         return navigate("/set-profile-photo");
-      } else if (fullName === null) {
+      } else if (name === null) {
         return navigate("/set-full-name");
       } else if (email === null) {
         return navigate("/set-email");
@@ -24,6 +25,12 @@ export const PrivateWrapper = ({ children }: { children: JSX.Element }) => {
 
   if (isAuth !== null) {
     return isAuth ? children : <Navigate to="/number-input" replace />;
+  }
+  if (isAuth === null) {
+    const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+    if (!token) {
+      return <Navigate to="/number-input" replace />;
+    }
   }
   if (!user) {
     return children;

@@ -5,7 +5,7 @@ export const photosApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllUserPhotos: builder.query<PhotoResponse[], void>({
       query: () => ({
-        url: "photos",
+        url: "/getImages",
         method: "GET",
       }),
     }),

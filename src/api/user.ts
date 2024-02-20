@@ -1,23 +1,25 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
-import { RequestUploadPhotoUrl, SetEmail, SetFullName, UploadProfilePicUrlResponse } from "../models/user";
+import {
+  RequestUploadPhotoUrl,
+  UploadProfilePicUrlResponse,
+} from "../models/user";
 import { apiSlice } from "./api";
 
 const apiWithTags = apiSlice.enhanceEndpoints({ addTagTypes: ["User"] });
 export const userApi = apiWithTags.injectEndpoints({
   endpoints: (builder) => ({
-    setFullName: builder.mutation<string, SetFullName>({
-      query: (fullName: SetFullName) => ({
-        url: "update/name",
+    setFullName: builder.mutation({
+      query: (name: string) => ({
+        url: `/updateName?name=${name}`,
         method: "PUT",
-        body: fullName,
       }),
       // @ts-ignore
       invalidatesTags: [{ type: "User" }],
     }),
-    setEmail: builder.mutation<string, SetEmail>({
-      query: (email: SetEmail) => ({
-        url: "update/email",
+    setEmail: builder.mutation({
+      query: (email: string) => ({
+        url: `/updateEmail?email=${email}`,
         method: "PUT",
         body: email,
       }),
@@ -29,7 +31,7 @@ export const userApi = apiWithTags.injectEndpoints({
       RequestUploadPhotoUrl
     >({
       query: (request: RequestUploadPhotoUrl) => ({
-        url: "request-upload-profile-pic-url",
+        url: "/selfiesPresignedPost",
         method: "POST",
         body: request,
       }),

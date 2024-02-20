@@ -6,14 +6,15 @@ import { PhotoExample, PhotoResponse } from "../../../models/photo";
 
 interface PopUpPhotoProps {
   photo: PhotoResponse | PhotoExample;
+  albumTitle: string;
   setPopUpPhotoVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export const PopUpPhoto = ({
   photo,
+  albumTitle,
   setPopUpPhotoVisible,
 }: PopUpPhotoProps) => {
-  const { fullPhotoAccessLink, isActivated, albumTitle, albumId, photoName } =
-    photo;
+  const { paid, id, albumId, url } = photo;
   const [isPaymentPopUpVisible, setPaymentPopUpVisible] =
     useState<boolean>(false);
   const [alert, setAlert] = useState<AlertData | null>(null);
@@ -51,8 +52,8 @@ export const PopUpPhoto = ({
       />
       {isPaymentPopUpVisible && (
         <PaymentPopUp
-          albumTitle={albumTitle as string}
-          albumId={albumId as string}
+          albumTitle={albumTitle}
+          albumId={albumId.toString()}
           setPaymentPopUpVisible={setPaymentPopUpVisible}
         />
       )}
@@ -64,16 +65,16 @@ export const PopUpPhoto = ({
         <div className="pop-up-photo-container__image">
           <img
             className="pop-up-photo-container__photo"
-            src={fullPhotoAccessLink}
+            src={url}
             alt="full photo"
           />
         </div>
       </div>
-      {isActivated ? (
+      {paid ? (
         <div className="pop-up-photo-container__buttons">
           <PhotoButtonsGroup
-            downloadPhotoUrl={fullPhotoAccessLink}
-            photoName={photoName}
+            downloadPhotoUrl={url}
+            photoName={id}
             setAlert={setAlert}
           />
         </div>

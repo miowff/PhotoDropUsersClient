@@ -9,5 +9,9 @@ export interface CreateStripeSession {
   productDescription: string;
 }
 export interface PaymentUrlResponse {
-  paymentUrl: string;
+  url: string;
+}
+export interface PaymentUrlRequest {
+  albumId: string;
+  albumName: string;
 }

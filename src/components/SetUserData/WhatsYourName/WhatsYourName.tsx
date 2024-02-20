@@ -8,7 +8,7 @@ import { setUser } from "../../../redux/user/authSlice";
 import { useEnterKeyHandler } from "../../../hooks/useEnterKeyHandler";
 import { Alert, AlertData } from "../../Alert";
 import { useAuth } from "../../../hooks/useAuth";
-import { SetFullName } from "../../../models/user";
+import { UserModel } from "../../../models/user";
 
 export const WhatsYourName = () => {
   const navigate = useNavigate();
@@ -24,13 +24,16 @@ export const WhatsYourName = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(
     name.length === 0
   );
-  const setFullName = async (request: SetFullName) => {
+  const setFullName = async (name: string) => {
     try {
-      const newName = await setFullNameRequest(request).unwrap();
+      const newName = await setFullNameRequest(name).unwrap();
       if (user) {
-        const updatedUser = {
+        const updatedUser: UserModel = {
           ...user,
-          fullName: newName,
+          client: {
+            ...user.client,
+            name: newName,
+          },
         };
         dispatch(setUser(updatedUser));
       }
@@ -54,7 +57,7 @@ export const WhatsYourName = () => {
   }, [name]);
   useEnterKeyHandler(async () => {
     setIsButtonDisabled(true);
-    await setFullName({ name });
+    await setFullName(name);
     setIsButtonDisabled(false);
   });
   return (
@@ -80,7 +83,7 @@ export const WhatsYourName = () => {
               className="default-button"
               disabled={isButtonDisabled}
               onClick={async () => {
-                await setFullName({ name });
+                await setFullName(name);
               }}
             >
               Next

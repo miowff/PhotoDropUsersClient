@@ -5,13 +5,11 @@ import { UserModel } from "../../models/user";
 interface AuthState {
   user: UserModel | null;
   accessToken: string | null;
-  refreshToken: string | null;
   isAuth: boolean | null;
 }
 const initialState: AuthState = {
   user: null,
   accessToken: null,
-  refreshToken: null,
   isAuth: null,
 };
 const authSlice = createSlice({
@@ -19,8 +17,8 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setToken: (state, action) => {
-      state.accessToken = action.payload.accessToken;
-      state.refreshToken = action.payload.refreshToken;
+      console.log(action.payload);
+      state.accessToken = action.payload;
       state.isAuth = true;
     },
     logOut: (state) => {

@@ -11,9 +11,9 @@ export const Header = () => {
   const [profilePicLink, setProfilePicLink] = useState(NoProfilePicture);
   useEffect(() => {
     if (user) {
-      const { profilePhotoLink } = user;
-      if (profilePhotoLink) {
-        setProfilePicLink(profilePhotoLink);
+      const { selfieUrl } = user.client;
+      if (selfieUrl) {
+        setProfilePicLink(selfieUrl);
       }
     }
   }, [user]);

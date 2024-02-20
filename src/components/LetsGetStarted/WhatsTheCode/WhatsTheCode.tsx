@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLoginOrRegisterMutation } from "../../../api/auth";
 import { useNavigate, useParams } from "react-router-dom";
-import { setToken, setUser } from "../../../redux/user/authSlice";
+import { setToken } from "../../../redux/user/authSlice";
 import { useEnterKeyHandler } from "../../../hooks/useEnterKeyHandler";
 import { useResendCode } from "../../../hooks/useResendCode";
 import { InputOtp } from "../OtpInput/OtpInput";
@@ -32,10 +32,9 @@ export const WhatsTheCode = () => {
   const loginOrRegister = async (request: LoginRegistrationModel) => {
     try {
       setIsButtonDisabled(true);
-      const loginRequestResult = await loginOrRegisterUser(request).unwrap();
-      const { tokens, currentUser } = loginRequestResult;
-      dispatch(setUser(currentUser));
-      dispatch(setToken(tokens));
+      const token = await loginOrRegisterUser(request).unwrap();
+      dispatch(setToken(token));
+      setToken(token);
       setIsButtonDisabled(false);
       navigate("/");
     } catch (err) {
@@ -50,7 +49,7 @@ export const WhatsTheCode = () => {
   };
   useEnterKeyHandler(async () => {
     if (enteredNumber) {
-      await loginOrRegister({ phoneNumber: enteredNumber, code });
+      await loginOrRegister({ number: enteredNumber, code });
     }
   });
   return (
@@ -91,7 +90,10 @@ export const WhatsTheCode = () => {
                 disabled={isButtonDisabled}
                 onClick={async () => {
                   if (enteredNumber) {
-                    await loginOrRegister({ phoneNumber: enteredNumber, code });
+                    await loginOrRegister({
+                      number: `+${enteredNumber}`,
+                      code,
+                    });
                   }
                 }}
               >

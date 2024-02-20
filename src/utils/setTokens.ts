@@ -1,9 +1,5 @@
+import { ACCESS_TOKEN_KEY} from "../enums/constants";
 
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../enums/constants";
-import { TokensResponse } from "../models/tokensResponse";
-
-export const setTokens = (tokens: TokensResponse) => {
-  const { accessToken, refreshToken } = tokens;
-  localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
-  localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+export const setToken = (token: string) => {
+  localStorage.setItem(ACCESS_TOKEN_KEY, token);
 };

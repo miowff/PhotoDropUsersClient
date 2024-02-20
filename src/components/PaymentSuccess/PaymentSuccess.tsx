@@ -3,21 +3,22 @@ import { Header } from "../../components/Header/Header";
 import { useGetAlbumInfoQuery } from "../../api/albums";
 import { useEffect, useState } from "react";
 import { Loader } from "../../components/Loader/Loader";
-
+interface AlbumPreview {
+  url: string;
+  preview: string;
+}
 export const PaymentSuccess = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { data, isFetching, isLoading } = useGetAlbumInfoQuery(id as string);
   const [albumTitle, setAlbumTitle] = useState<string>("");
-  const [previewUrl, setPreviewUrl] = useState<string>("");
-  const [previewBase64, setPreviewBase64] = useState<string>("");
   const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false);
+  const [image, setImage] = useState<AlbumPreview | null>(null);
   useEffect(() => {
     if (data) {
-      const { title, previewPhotoLink, previewBase64 } = data;
-      setPreviewBase64(previewBase64);
-      setAlbumTitle(title);
-      setPreviewUrl(previewPhotoLink);
+      const { image, album } = data;
+      setAlbumTitle(album.name);
+      setImage(image);
     }
   }, [data]);
   return (
@@ -42,10 +43,10 @@ export const PaymentSuccess = () => {
                 </p>
                 <img
                   className="success__album-preview-image"
+                  src={isImageLoaded ? image?.url : image?.preview}
                   onLoad={() => {
                     setIsImageLoaded(true);
                   }}
-                  src={isImageLoaded ? previewUrl : previewBase64}
                 />
                 <button
                   className="success__see-photos"

@@ -1,16 +1,13 @@
 export interface PhotoExample {
-  fullPhotoAccessLink: string;
-  previewBase64?: string;
-  isActivated: boolean;
-  albumId?: string;
-  albumTitle?: string;
-  photoName: string;
+  paid: boolean;
+  id: string;
+  albumId: number;
+  url: string;
 }
 export interface PhotoResponse {
-  fullPhotoAccessLink: string;
-  previewBase64: string;
-  isActivated: boolean;
-  albumId: string;
-  albumTitle: string;
-  photoName: string;
+  paid: boolean;
+  id: string;
+  albumId: number;
+  preview: string;
+  url: string;
 }

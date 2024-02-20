@@ -1,56 +1,34 @@
 import {
   fetchBaseQuery,
   createApi,
-  BaseQueryFn,
   FetchArgs,
+  BaseQueryFn,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../redux/store";
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../enums/constants";
-import { logOut, setToken } from "../redux/user/authSlice";
+import { ACCESS_TOKEN_KEY } from "../enums/constants";
+import { logOut } from "../redux/user/authSlice";
 import { removeTokens } from "../utils/removeTokens";
-import { setTokens } from "../utils/setTokens";
-import { TokensResponse } from "../models/tokensResponse";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://2orh1m3spg.execute-api.us-east-1.amazonaws.com",
+  baseUrl: "https://photodropapp.fly.dev/clients",
   prepareHeaders(headers, { getState }) {
     const token =
       (getState() as RootState).auth.accessToken ||
       localStorage.getItem(ACCESS_TOKEN_KEY);
     if (token && token !== null) {
-      headers.set("Authorization", token);
+      headers.set("Authorization", `Bearer ${token}`);
     }
   },
 });
-const baseQueryWithReAuth: BaseQueryFn<
+const baseQueryWithLogOut: BaseQueryFn<
   string | FetchArgs,
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions);
-  if (result.error && result.error.status === 401) {
-    try {
-      const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
-      if (!refreshToken) {
-        api.dispatch(logOut());
-        return result;
-      }
-      const refreshResult = (await baseQuery(
-        { url: "/refresh-token", method: "POST", body: { refreshToken } },
-        api,
-        extraOptions
-      )) as { data: TokensResponse } | undefined;
-      if (refreshResult) {
-        api.dispatch(setToken(refreshResult.data));
-        result = await baseQuery(args, api, extraOptions);
-        setTokens(refreshResult.data);
-        return result;
-      } else {
-        api.dispatch(logOut());
-        removeTokens();
-      }
-    } catch (err) {
+  const result = await baseQuery(args, api, extraOptions);
+  if (result.error && "originalStatus" in result.error) {
+    if (result.error.originalStatus === 401) {
       api.dispatch(logOut());
       removeTokens();
     }
@@ -59,6 +37,6 @@ const baseQueryWithReAuth: BaseQueryFn<
 };
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: baseQueryWithReAuth,
+  baseQuery: baseQueryWithLogOut,
   endpoints: () => ({}),
 });

@@ -15,6 +15,7 @@ export const NoPhotosYet = () => {
     <section className="no-photos-yet">
       {isPopUpPhotoVisible && (
         <PopUpPhoto
+          albumTitle=""
           photo={photo as PhotoResponse | PhotoExample}
           setPopUpPhotoVisible={setPopUpPhotoVisible}
         />
@@ -47,9 +48,10 @@ export const NoPhotosYet = () => {
                 className="no-photos-yet__artists-prints-thumbnail"
                 onClick={() => {
                   setPhoto({
-                    photoName: "Chase Baker",
-                    isActivated: true,
-                    fullPhotoAccessLink: ChaseBaker,
+                    id: "Chase Baker",
+                    paid: true,
+                    url: ChaseBaker,
+                    albumId: -1,
                   });
                   setPopUpPhotoVisible(true);
                 }}
@@ -65,9 +67,10 @@ export const NoPhotosYet = () => {
                 className="no-photos-yet__artists-prints-thumbnail"
                 onClick={() => {
                   setPhoto({
-                    photoName: "Jorge Gardner",
-                    isActivated: true,
-                    fullPhotoAccessLink: JorgeGardner,
+                    id: "Jorge Gardner",
+                    paid: true,
+                    url: JorgeGardner,
+                    albumId: -1,
                   });
                   setPopUpPhotoVisible(true);
                 }}

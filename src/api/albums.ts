@@ -1,31 +1,30 @@
-
-import { AlbumModel, AlbumWithPhotos } from "../models/albums";
-import { PaymentUrlResponse } from "../models/payments";
+import { AlbumDetails, AlbumModel, AlbumWithPhotos } from "../models/albums";
+import { PaymentUrlRequest, PaymentUrlResponse } from "../models/payments";
 import { apiSlice } from "./api";
 
 export const albumsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllUserAlbums: builder.query<AlbumModel[], void>({
       query: () => ({
-        url: "albums",
+        url: "/getAlbums",
         method: "GET",
       }),
     }),
     getAlbumWithPhotos: builder.query<AlbumWithPhotos, string>({
       query: (albumId) => ({
-        url: `album?albumId=${albumId}`,
+        url: `/getImagesByAlbumClient?albumId=${albumId}`,
         method: "GET",
       }),
     }),
-    getAlbumInfo: builder.query<AlbumModel, string>({
+    getAlbumInfo: builder.query<AlbumDetails, string>({
       query: (albumId) => ({
-        url: `album-info?albumId=${albumId}`,
+        url: `/getDetailedAlbum?albumId=${albumId}`,
         method: "GET",
       }),
     }),
-    getPaymentUrl: builder.query<PaymentUrlResponse, string>({
-      query: (albumId) => ({
-        url: `activate?albumId=${albumId}`,
+    getPaymentUrl: builder.query<PaymentUrlResponse, PaymentUrlRequest>({
+      query: ({ albumId, albumName }) => ({
+        url: `/getPaymentLink?albumId=${albumId}&albumName=${albumName}`,
         method: "GET",
       }),
     }),

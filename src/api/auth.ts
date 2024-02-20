@@ -1,43 +1,33 @@
-
-
-import { RefreshTokens, TokensResponse } from "../models/tokensResponse";
-import { AuthResponse, LoginRegistrationModel, UserModel } from "../models/user";
+import { LoginRegistrationModel, UserModel } from "../models/user";
 import { apiSlice } from "./api";
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    loginOrRegister: builder.mutation<AuthResponse, LoginRegistrationModel>({
+    loginOrRegister: builder.mutation<string, LoginRegistrationModel>({
       query: (userData) => ({
-        url: "/login-or-register",
+        url: "/auth/verifyCode",
         method: "POST",
         body: userData,
       }),
     }),
     getCurrentUser: builder.query<UserModel, void>({
       query: () => ({
-        url: "/current-user",
+        url: "",
         method: "GET",
       }),
     }),
     resendCode: builder.mutation<string, string>({
-      query: (phoneNumber) => ({
-        url: "/request-code?resend=true",
+      query: (number) => ({
+        url: "/auth/sendCode",
         method: "POST",
-        body: { phoneNumber },
+        body: { number },
       }),
     }),
     requestCode: builder.mutation<string, string>({
-      query: (phoneNumber) => ({
-        url: "/request-code",
+      query: (number) => ({
+        url: "/auth/sendCode",
         method: "POST",
-        body: { phoneNumber },
-      }),
-    }),
-    refreshToken: builder.mutation<RefreshTokens, TokensResponse>({
-      query: (refreshToken) => ({
-        url: "/refresh-token",
-        method: "POST",
-        body: { refreshToken },
+        body: { number },
       }),
     }),
   }),
@@ -48,5 +38,4 @@ export const {
   useLoginOrRegisterMutation,
   useRequestCodeMutation,
   useResendCodeMutation,
-  useRefreshTokenMutation,
 } = authApi;
