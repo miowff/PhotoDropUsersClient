@@ -1,5 +1,5 @@
-import FrameologyLogo from "../../public/images/FrameologyLogo.svg";
-import ClimateNeutralLogo from "../../public/images/ClimateNeutralLogo.svg";
+import FrameologyLogo from "../../../public/images/FrameologyLogo.svg";
+import ClimateNeutralLogo from "../../../public/images/ClimateNeutralLogo.svg";
 import { isMobile } from "react-device-detect";
 export const Footer = () => {
   return (

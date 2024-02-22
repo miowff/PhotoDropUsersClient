@@ -1,4 +1,4 @@
-import LoaderGif from "../../public/images/Loader.gif";
+import LoaderGif from "../../../public/images/Loader.gif";
 export const Loader = () => {
   return (
     <div className="loader">

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import NoProfilePicture from "../../../public/images/NoProfilePicture.svg";
+import NoProfilePicture from "/images/NoProfilePicture.svg";
 import { isMobile } from "react-device-detect";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";

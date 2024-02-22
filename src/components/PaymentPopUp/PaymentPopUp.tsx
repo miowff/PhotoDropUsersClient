@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useHandleOutsideClick } from "../../hooks/useHandleOutsideClick";
-import ApplePay from "../../public/images/ApplePayLogo.svg";
-import PayPal from "../../public/images/PayPal.svg";
+import ApplePay from "/images/ApplePayLogo.svg";
+import PayPal from "/images/PayPal.svg";
 import { useLazyGetPaymentUrlQuery } from "../../api/albums";
 interface PaymentPopUpProps {
   albumTitle: string;

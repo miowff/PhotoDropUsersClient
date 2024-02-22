@@ -1,5 +1,5 @@
-import PhotoDropLogo from "../../public/images/PhotoDropLogo.png";
-import NoProfilePicture from "../../public/images/NoProfilePicture.svg";
+import PhotoDropLogo from "/images/PhotoDropLogo.png";
+import NoProfilePicture from "/images/NoProfilePicture.svg";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";

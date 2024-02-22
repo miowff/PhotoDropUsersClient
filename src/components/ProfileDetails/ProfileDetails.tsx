@@ -1,6 +1,6 @@
 import { Header } from "../../components/Header/Header";
-import NoProfilePicture from "../../public/images/NoProfilePicture.svg";
-import PenIcon from "../../public/images/PenIcon.svg";
+import NoProfilePicture from "../../../public/images/NoProfilePicture.svg";
+import PenIcon from "../../../public/images/PenIcon.svg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SelfieEditPopUp } from "../../components/SetUserData/SelfieEditPopUp/SelfieEditPopUp";

@@ -1,6 +1,6 @@
 import { isMobile } from "react-device-detect";
-import DownloadIcon from "../../../public/images/DownloadIcon.svg";
-import ShareIcon from "../../../public/images/ShareIcon.svg";
+import DownloadIcon from "/images/DownloadIcon.svg";
+import ShareIcon from "/images/ShareIcon.svg";
 import { AlertData } from "../../Alert";
 interface PhotoButtonsProps {
   downloadPhotoUrl: string;

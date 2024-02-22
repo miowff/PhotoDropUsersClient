@@ -1,6 +1,6 @@
-import NewSms from "../../../public/images/NewSms.svg";
-import ChaseBaker from "../../../public/images/ArtistsPrints/ChaseBaker.jpg";
-import JorgeGardner from "../../../public/images/ArtistsPrints/JorgeGardner.jpg";
+import NewSms from "/images/NewSms.svg";
+import ChaseBaker from "/images/ArtistsPrints/ChaseBaker.jpg";
+import JorgeGardner from "/images/ArtistsPrints/JorgeGardner.jpg";
 import { useState } from "react";
 import { PopUpPhoto } from "../../Photos/PopUpPhoto/PopUpPhoto";
 import { usePreventVerticalScroll } from "../../../hooks/useHorizontalScroll";

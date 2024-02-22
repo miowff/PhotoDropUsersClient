@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import NoProfilePicture from "../../../public/images/NoProfilePicture.svg";
+import NoProfilePicture from "../../../../public/images/NoProfilePicture.svg";
 import { isMobile } from "react-device-detect";
 import { UploadSelfieOptionsPopup } from "../UploadSelfieOptionsPopup/UploadSelfieOptionsPopup";
 import { SelfieEditPopUp } from "../SelfieEditPopUp/SelfieEditPopUp";
