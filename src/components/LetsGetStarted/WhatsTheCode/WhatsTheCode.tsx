@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useLoginOrRegisterMutation } from "../../../api/auth";
+import {
+  useLazyGetCurrentUserQuery,
+  useLoginOrRegisterMutation,
+} from "../../../api/auth";
 import { useNavigate, useParams } from "react-router-dom";
-import { setToken } from "../../../redux/user/authSlice";
+import { setToken, setUser } from "../../../redux/user/authSlice";
 import { useEnterKeyHandler } from "../../../hooks/useEnterKeyHandler";
 import { useResendCode } from "../../../hooks/useResendCode";
 import { InputOtp } from "../OtpInput/OtpInput";
@@ -12,7 +15,6 @@ import { LoginRegistrationModel } from "../../../models/user";
 export const WhatsTheCode = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const { phoneNumber: enteredNumber } = useParams();
   useEffect(() => {
     if (enteredNumber === null) {
@@ -22,6 +24,7 @@ export const WhatsTheCode = () => {
   const [code, setCode] = useState<string>("");
   const [alert, setAlert] = useState<AlertData | null>(null);
   const [loginOrRegisterUser] = useLoginOrRegisterMutation();
+  const [getUser] = useLazyGetCurrentUserQuery();
   const { handleRequest: requestCode } = useResendCode({ setAlert });
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(
     code.length !== 6
@@ -35,6 +38,8 @@ export const WhatsTheCode = () => {
       const token = await loginOrRegisterUser(request).unwrap();
       dispatch(setToken(token));
       setToken(token);
+      const currentUser = await getUser().unwrap();
+      dispatch(setUser(currentUser));
       setIsButtonDisabled(false);
       navigate("/");
     } catch (err) {
