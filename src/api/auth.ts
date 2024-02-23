@@ -20,7 +20,7 @@ export const authApi = apiSlice.injectEndpoints({
       query: (number) => ({
         url: "/auth/sendCode",
         method: "POST",
-        body: { number },
+        body: { number:`+${number}` },
       }),
     }),
     requestCode: builder.mutation<string, string>({
