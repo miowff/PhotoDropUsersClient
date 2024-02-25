@@ -8,7 +8,7 @@ export interface AlertData {
   message: string;
   isError: boolean;
 }
-export const Alert = ({ data, onClose }: AlertProps) => {
+export const  Alert = ({ data, onClose }: AlertProps) => {
   useEffect(() => {
     if (data) {
       const timeoutId = setTimeout(() => {
