@@ -85,20 +85,19 @@ export const NumberInput = () => {
                 marginLeft: "10px",
                 backgroundColor: "#F4F4F4",
                 borderRadius: "10px",
-                border: "none",
+                border: "1px solid #EEEEEE",
               }}
               countrySelectorStyleProps={{
                 buttonStyle: {
                   backgroundColor: "#F4F4F4",
                   width: "70px",
                   borderRadius: "10px",
-                  border: "none",
+                  border: "1px solid #EEEEEE",
                 },
 
                 dropdownArrowStyle: {
                   width: "13.5px",
                   height: "6.5px",
-                  marginLeft: "10px",
                   background: "url(/images/DownArrow.svg) no-repeat",
                   backgroundSize: "cover",
                   "--react-international-phone-country-selector-arrow-size":
