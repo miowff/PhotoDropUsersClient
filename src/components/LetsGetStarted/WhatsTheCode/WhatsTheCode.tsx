@@ -53,8 +53,10 @@ export const WhatsTheCode = () => {
     }
   };
   useEnterKeyHandler(async () => {
-    if (enteredNumber) {
-      await loginOrRegister({ number: enteredNumber, code });
+    if (!isButtonDisabled) {
+      if (enteredNumber) {
+        await loginOrRegister({ number: enteredNumber, code });
+      }
     }
   });
   return (
@@ -74,7 +76,7 @@ export const WhatsTheCode = () => {
               </h4>
             </div>
             <p className="whats-the-code__text">
-              Enter the code sent to <span>+{enteredNumber}</span>
+              Enter the code sent to <span>{enteredNumber}</span>
             </p>
             <div className="whats-the-code__input-container">
               <InputOtp onChangeOTP={setCode} />
@@ -96,7 +98,7 @@ export const WhatsTheCode = () => {
                 onClick={async () => {
                   if (enteredNumber) {
                     await loginOrRegister({
-                      number: `+${enteredNumber}`,
+                      number: `${enteredNumber}`,
                       code,
                     });
                   }

@@ -163,13 +163,12 @@
     color: #262626;
     font-family: TerminaBold, FuturaPtDemi;
     font-size: 30px;
-    max-width: 400px;
     margin: 0 auto;
+    text-align: center;
 }
 
 @media (max-width:1024px) {
     .default-title {
-        max-width: 288px;
         font-size: 22px;
     }
 }

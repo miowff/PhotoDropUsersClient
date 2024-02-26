@@ -1,16 +1,25 @@
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/material.css";
+import "react-international-phone/style.css";
 import {
   StageContent,
   setCurrentStage,
 } from "../../../redux/letsGetStarted/letsGetStartedSlice";
+import { PhoneNumberUtil } from "google-libphonenumber";
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEnterKeyHandler } from "../../../hooks/useEnterKeyHandler";
 import { useRequestCode } from "../../../hooks/useRequestCode";
 import { Alert, AlertData } from "../../Alert";
+import { PhoneInput } from "react-international-phone";
 
+const phoneUtil = PhoneNumberUtil.getInstance();
+const isPhoneValid = (phone: string) => {
+  try {
+    return phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(phone));
+  } catch (error) {
+    return false;
+  }
+};
 export const NumberInput = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,12 +29,7 @@ export const NumberInput = () => {
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [alert, setAlert] = useState<AlertData | null>(null);
   const { handleRequest: requestCode } = useRequestCode({ setAlert });
-  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(
-    phoneNumber.length === 0
-  );
-  useEffect(() => {
-    setIsButtonDisabled(phoneNumber.length === 0);
-  }, [phoneNumber]);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
   const handleNextAction = async () => {
     setIsButtonDisabled(true);
     await requestCode(phoneNumber);
@@ -35,7 +39,12 @@ export const NumberInput = () => {
     setIsButtonDisabled(false);
     navigate(`/code-input/${phoneNumber}`);
   };
-  useEnterKeyHandler(handleNextAction);
+  useEnterKeyHandler(() => {
+    if (!isButtonDisabled) {
+      handleNextAction();
+    }
+  });
+
   return (
     <section className="number-input">
       <div className="container">
@@ -54,12 +63,54 @@ export const NumberInput = () => {
           <div className="number-input__content">
             <p className="number-input__text">Enter your phone number</p>
             <PhoneInput
-              specialLabel={""}
-              country={"us"}
+              defaultCountry="us"
               value={phoneNumber}
-              onChange={setPhoneNumber}
-              inputClass="number-input__input"
-            />
+              onChange={(e) => {
+                setPhoneNumber(e);
+                setIsButtonDisabled(!isPhoneValid(e));
+              }}
+              className="number-input__input"
+              style={
+                {
+                  "--react-international-phone-flag-width": "30px",
+                  "--react-international-phone-flag-height": "25px",
+                  "--react-international-phone-height": "40px",
+                  "--react-international-phone-country-selector-background-color":
+                    "#F4F4F4",
+                  "--react-international-phone-font-size": "16px",
+                } as React.CSSProperties
+              }
+              inputStyle={{
+                width: "330px",
+                marginLeft: "10px",
+                backgroundColor: "#F4F4F4",
+                borderRadius: "10px",
+                border: "none",
+              }}
+              countrySelectorStyleProps={{
+                buttonStyle: {
+                  backgroundColor: "#F4F4F4",
+                  width: "70px",
+                  borderRadius: "10px",
+                  border: "none",
+                },
+                dropdownArrowStyle: {
+                  border: "solid #6D6D6D",
+                  borderWidth: " 0 2px 2px 0",
+                  display: "inline-block",
+                  padding: "5px",
+                  borderRadius: "1px",
+                  transform: "rotate(45deg)",
+                  marginLeft: "10px",
+                },
+                dropdownStyleProps: {
+                  style: {
+                    outline: "none",
+                  },
+                },
+              }}
+            ></PhoneInput>
+
             <div className="number-input__button-container">
               <button
                 className="default-button"
@@ -68,7 +119,7 @@ export const NumberInput = () => {
                   await handleNextAction();
                 }}
               >
-                Next
+                Create account
               </button>
             </div>
 
