@@ -94,15 +94,15 @@ export const NumberInput = () => {
                   borderRadius: "10px",
                   border: "none",
                 },
+
                 dropdownArrowStyle: {
-                  border: "solid #6D6D6D",
-                  borderWidth: " 0 2px 2px 0",
-                  display: "inline-block",
-                  padding: "5px",
-                  borderRadius: "1px",
-                  transform: "rotate(45deg)",
-                  marginLeft: "10px",
-                },
+                  width: "13.5px",
+                  height: "6.5px",
+                  background: "url(/images/DownArrow.svg) no-repeat",
+                  backgroundSize: "cover",
+                  "--react-international-phone-country-selector-arrow-size":
+                    "0px",
+                } as React.CSSProperties,
                 dropdownStyleProps: {
                   style: {
                     outline: "none",
