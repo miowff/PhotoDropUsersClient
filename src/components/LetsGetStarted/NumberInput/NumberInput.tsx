@@ -98,6 +98,7 @@ export const NumberInput = () => {
                 dropdownArrowStyle: {
                   width: "13.5px",
                   height: "6.5px",
+                  marginLeft: "10px",
                   background: "url(/images/DownArrow.svg) no-repeat",
                   backgroundSize: "cover",
                   "--react-international-phone-country-selector-arrow-size":
