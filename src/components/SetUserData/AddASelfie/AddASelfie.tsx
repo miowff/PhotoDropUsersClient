@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import NoProfilePicture from "/images/NoProfilePicture.svg";
+import NoProfilePicture from "/images/NoPicture.svg";
 import { isMobile } from "react-device-detect";
 import { UploadSelfieOptionsPopup } from "../UploadSelfieOptionsPopup/UploadSelfieOptionsPopup";
 import { SelfieEditPopUp } from "../SelfieEditPopUp/SelfieEditPopUp";
@@ -43,11 +43,13 @@ export const AddASelfie = () => {
               A selfie allows your photos to be synced with your account.
             </p>
             <div className="add-a-selfie__prev-photo-container">
-              <img
-                className="add-a-selfie__prev-photo"
-                src={NoProfilePicture}
-                alt="profile pic"
-              ></img>
+              <div className="add-a-selfie__photo-container">
+                <img
+                  className="add-a-selfie__prev-photo"
+                  src={NoProfilePicture}
+                  alt="profile pic"
+                ></img>
+              </div>
               <button
                 className="add-a-selfie__plus-button"
                 onClick={() => {

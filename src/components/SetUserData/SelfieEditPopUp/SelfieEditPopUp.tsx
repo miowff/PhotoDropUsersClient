@@ -40,14 +40,8 @@ export const SelfieEditPopUp = ({
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [selectedImage, setSelectedImage] = useState<string>(NoProfilePicture);
-  const [cropArea, setCropArea] = useState<Area>({
-    x: 0,
-    y: 0,
-    width: 66,
-    height: 100,
-  });
-
-  const onCropComplete = (croppedAreaPixels: Area) => {
+  const [cropArea, setCropArea] = useState<Area>();
+  const onCropComplete = (_croppedArea: Area, croppedAreaPixels: Area) => {
     setCropArea(croppedAreaPixels);
   };
 
@@ -83,31 +77,36 @@ export const SelfieEditPopUp = ({
     try {
       setIsSelfieUploading(true);
       if (currentPic && typeof currentPic !== "string") {
-        const croppedPic = await createCroppedImage(currentPic, cropArea);
+        const croppedPic = await createCroppedImage(
+          currentPic,
+          cropArea as Area
+        );
 
-        const { type } = croppedPic as File;
-        const { post, accessUrl } = await getUploadProfilePicUrl({
-          contentType: type,
-        }).unwrap();
-        const { url, fields } = post;
-        const formData = new FormData();
-        for (const [key, value] of Object.entries(fields)) {
-          formData.append(key, value);
-        }
-        formData.append("file", currentPic);
-        await axios.post(url, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-        if (user) {
-          const updatedUser: UserModel = {
-            ...user,
-            client: {
-              ...user.client,
-              selfieUrl: accessUrl,
-            },
-          };
-          setSelectedFile(updatedUser.client.selfieUrl);
-          dispatch(setUser(updatedUser));
+        if (croppedPic) {
+          const { type } = croppedPic;
+          const { post, accessUrl } = await getUploadProfilePicUrl({
+            contentType: type,
+          }).unwrap();
+          const { url, fields } = post;
+          const formData = new FormData();
+          for (const [key, value] of Object.entries(fields)) {
+            formData.append(key, value);
+          }
+          formData.append("file", croppedPic);
+          await axios.post(url, formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+          });
+          if (user) {
+            const updatedUser: UserModel = {
+              ...user,
+              client: {
+                ...user.client,
+                selfieUrl: accessUrl,
+              },
+            };
+            setSelectedFile(updatedUser.client.selfieUrl);
+            dispatch(setUser(updatedUser));
+          }
         }
       }
       setIsSelfieUploading(false);

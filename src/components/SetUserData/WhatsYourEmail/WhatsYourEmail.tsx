@@ -75,7 +75,11 @@ export const WhatsYourEmail = ({ fullName }: WhatsYourEmailProps) => {
         <div className="lets-get-started-inner whats-your-email__inner">
           <div className="whats-your-email__inner-content">
             <div className="whats-your-email__title-container">
-              <h4 className="default-title">Hey there,{fullName}!👋</h4>
+              <h4 className="default-title">
+                Hey there,
+                <br />
+                {fullName}!👋
+              </h4>
             </div>
             <input
               className="default-input whats-your-email__input"

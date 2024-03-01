@@ -21,7 +21,13 @@ export const UserContent = ({ albums, photos }: UserContentProps) => {
     <section className="user-content">
       {isPopUpPhotoVisible && (
         <PopUpPhoto
-          albumTitle={"ToDo:album name"}
+          albumTitle={
+            albums.find((album) => {
+              if (album.id === photo?.albumId) {
+                return album;
+              }
+            })?.name as string
+          }
           photo={photo as PhotoResponse}
           setPopUpPhotoVisible={setPopUpPhotoVisible}
         />

@@ -75,7 +75,12 @@ export const AlbumDetails = () => {
                     </div>
                   </div>
                   {!isActivated && (
-                    <p className="album-details__unlock-photos">
+                    <p
+                      className="album-details__unlock-photos"
+                      onClick={() => {
+                        setPaymentPopUpVisible(true);
+                      }}
+                    >
                       Unlock your photos
                     </p>
                   )}

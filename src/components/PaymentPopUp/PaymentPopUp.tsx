@@ -42,7 +42,7 @@ export const PaymentPopUp = ({
           <div className="payment-pop-up__description">
             <p className="default-text payment-pop-up__text">
               Get all the photos from
-              <span className="default-bold-text"> {albumTitle}</span> in
+              <span className="default-bold-text">{albumTitle}</span> in
               hi-resolution with no watermark.
             </p>
             <p className="payment-pop-up__price">$5</p>

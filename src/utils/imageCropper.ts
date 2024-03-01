@@ -16,7 +16,6 @@ export const createCroppedImage = async (
 
       reader.readAsDataURL(file);
     });
-
     await imageLoadPromise;
     const canvas = document.createElement("canvas");
     const scaleX = image.naturalWidth / image.width;

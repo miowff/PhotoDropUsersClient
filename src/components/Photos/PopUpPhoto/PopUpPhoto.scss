@@ -1,6 +1,14 @@
 .pop-up-photo-container {
 
     &__image {
+
+        img {
+            width: 100%;
+            height: 100%;
+            max-width: 100vw;
+            max-height: 100vh;
+        }
+
         &::after {
             content: '';
             position: absolute;
@@ -45,6 +53,7 @@
         font-size: 22px;
         cursor: pointer;
     }
+
 }
 
 @media (max-width:1024px) {
