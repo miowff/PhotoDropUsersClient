@@ -100,6 +100,7 @@ export const NumberInput = () => {
                   height: "6.5px",
                   background: "url(/images/DownArrow.svg) no-repeat",
                   backgroundSize: "cover",
+                  marginLeft: "4px",
                   "--react-international-phone-country-selector-arrow-size":
                     "0px",
                 } as React.CSSProperties,
