@@ -61,6 +61,7 @@ export const SelfieEditPopUp = ({
   }, [currentPic]);
 
   useHandleOutsideClick(selfieEditAreaRef, () => {
+    setSelectedFile(user?.client.selfieUrl as string);
     setSelfieEditVisible(false);
     if (!isMobile) {
       setUploadOptionsVisible(true);
