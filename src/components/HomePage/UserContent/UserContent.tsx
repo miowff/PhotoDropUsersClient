@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Album } from "../Album/Album";
 import { PopUpPhoto } from "../../Photos/PopUpPhoto/PopUpPhoto";
 import { usePreventVerticalScroll } from "../../../hooks/useHorizontalScroll";
@@ -6,6 +6,7 @@ import { handleScroll } from "../../../hooks/useHandleHorizontalScroll";
 import { PhotosGroup } from "../../Photos/PhotosGroup/PhotosGroup";
 import { AlbumModel } from "../../../models/albums";
 import { PhotoResponse } from "../../../models/photo";
+import { useInView } from "react-intersection-observer";
 
 interface UserContentProps {
   albums: AlbumModel[];
@@ -15,8 +16,15 @@ interface UserContentProps {
 export const UserContent = ({ albums, photos }: UserContentProps) => {
   const [photo, setPhoto] = useState<PhotoResponse | null>(null);
   const [isPopUpPhotoVisible, setPopUpPhotoVisible] = useState<boolean>(false);
-
-  usePreventVerticalScroll(".album");
+  const [isScrollable, satIsScrollable] = useState<boolean>(false);
+  const { ref, inView } = useInView();
+  usePreventVerticalScroll(".album", isScrollable);
+  useEffect(() => {
+    console.log(inView);
+    if (!inView) {
+      satIsScrollable(true);
+    }
+  }, [inView]);
   return (
     <section className="user-content">
       {isPopUpPhotoVisible && (
@@ -47,11 +55,12 @@ export const UserContent = ({ albums, photos }: UserContentProps) => {
                   }
                 });
                 return (
-                  <Album
-                    album={album}
-                    preview={preview as PhotoResponse}
+                  <div
                     key={index}
-                  />
+                    ref={index === albums.length - 1 ? ref : undefined}
+                  >
+                    <Album album={album} preview={preview as PhotoResponse} />
+                  </div>
                 );
               })}
             </div>
