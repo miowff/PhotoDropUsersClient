@@ -118,6 +118,8 @@
 
 .crop-area {
     color: rgb(32 32 32) !important;
+    width: 285px;
+    height: 285px;
 }
 
 .crop-inner {
@@ -168,8 +170,4 @@
             flex-direction: row;
         }
     }
-}
-
-.test {
-    position: absolute;
 }

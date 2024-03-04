@@ -10,7 +10,7 @@ import { PhotoExample, PhotoResponse } from "../../../models/photo";
 export const NoPhotosYet = () => {
   const [photo, setPhoto] = useState<PhotoResponse | PhotoExample | null>(null);
   const [isPopUpPhotoVisible, setPopUpPhotoVisible] = useState<boolean>(false);
-  usePreventVerticalScroll(".no-photos-yet__artists-prints-image");
+  usePreventVerticalScroll(".no-photos-yet__artists-prints-image", false);
   return (
     <section className="no-photos-yet">
       {isPopUpPhotoVisible && (

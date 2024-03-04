@@ -20,7 +20,6 @@ export const UserContent = ({ albums, photos }: UserContentProps) => {
   const { ref, inView } = useInView();
   usePreventVerticalScroll(".album", isScrollable);
   useEffect(() => {
-    console.log(inView);
     if (!inView) {
       satIsScrollable(true);
     }

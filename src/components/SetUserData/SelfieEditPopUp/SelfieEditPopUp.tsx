@@ -44,7 +44,6 @@ export const SelfieEditPopUp = ({
   const onCropComplete = (_croppedArea: Area, croppedAreaPixels: Area) => {
     setCropArea(croppedAreaPixels);
   };
-
   useEffect(() => {
     if (currentPic instanceof File) {
       const reader = new FileReader();
@@ -153,6 +152,7 @@ export const SelfieEditPopUp = ({
             <span
               className="selfie-edit__x-mark"
               onClick={() => {
+                setSelectedFile(user?.client.selfieUrl as string);
                 setSelfieEditVisible(false);
               }}
             ></span>
@@ -174,8 +174,12 @@ export const SelfieEditPopUp = ({
                     aspect={1}
                     cropShape="round"
                     showGrid={false}
-                    onCropChange={setCrop}
-                    onZoomChange={setZoom}
+                    onCropChange={(value) => {
+                      setCrop(value);
+                    }}
+                    onZoomChange={(value) => {
+                      setZoom(value);
+                    }}
                     onCropComplete={onCropComplete}
                   />
                 </div>
