@@ -21,9 +21,10 @@ export const UserContent = ({ albums, photos }: UserContentProps) => {
   usePreventVerticalScroll(".album", isScrollable);
   useEffect(() => {
     if (!inView) {
+      console.log("not in view");
       satIsScrollable(true);
     }
-  }, [inView]);
+  }, []);
   return (
     <section className="user-content">
       {isPopUpPhotoVisible && (
