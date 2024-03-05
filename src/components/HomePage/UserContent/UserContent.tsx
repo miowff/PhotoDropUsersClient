@@ -16,14 +16,21 @@ interface UserContentProps {
 export const UserContent = ({ albums, photos }: UserContentProps) => {
   const [photo, setPhoto] = useState<PhotoResponse | null>(null);
   const [isPopUpPhotoVisible, setPopUpPhotoVisible] = useState<boolean>(false);
-  const [isScrollable, satIsScrollable] = useState<boolean>(false);
+  const [isScrollable, setIsScrollable] = useState<boolean>(false);
+  const [hasBeenInView, setHasBeenInView] = useState<boolean>(false);
   const { ref, inView } = useInView();
-  usePreventVerticalScroll(".album", isScrollable);
+  usePreventVerticalScroll(".user-content__albums-container", isScrollable);
   useEffect(() => {
-    if (!inView) {
-      satIsScrollable(true);
+    console.log(inView);
+    setHasBeenInView(true);
+  }, [inView]);
+  useEffect(() => {
+    if (inView) {
+      setIsScrollable(false);
+    } else {
+      setIsScrollable(true);
     }
-  }, []);
+  }, [hasBeenInView]);
   return (
     <section className="user-content">
       {isPopUpPhotoVisible && (
@@ -53,6 +60,7 @@ export const UserContent = ({ albums, photos }: UserContentProps) => {
                     return photo;
                   }
                 });
+
                 return (
                   <div
                     key={index}
