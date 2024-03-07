@@ -6,7 +6,6 @@ import { handleScroll } from "../../../hooks/useHandleHorizontalScroll";
 import { PhotosGroup } from "../../Photos/PhotosGroup/PhotosGroup";
 import { AlbumModel } from "../../../models/albums";
 import { PhotoResponse } from "../../../models/photo";
-import { useInView } from "react-intersection-observer";
 
 interface UserContentProps {
   albums: AlbumModel[];
@@ -17,20 +16,23 @@ export const UserContent = ({ albums, photos }: UserContentProps) => {
   const [photo, setPhoto] = useState<PhotoResponse | null>(null);
   const [isPopUpPhotoVisible, setPopUpPhotoVisible] = useState<boolean>(false);
   const [isScrollable, setIsScrollable] = useState<boolean>(false);
-  const [hasBeenInView, setHasBeenInView] = useState<boolean>(false);
-  const { ref, inView } = useInView();
-  usePreventVerticalScroll(".user-content__albums-container", isScrollable);
   useEffect(() => {
-    console.log(inView);
-    setHasBeenInView(true);
-  }, [inView]);
-  useEffect(() => {
-    if (inView) {
-      setIsScrollable(false);
+    if (window.innerWidth > 1200) {
+      if (albums.length > 5) {
+        setIsScrollable(true);
+      } else {
+        setIsScrollable(false);
+      }
     } else {
-      setIsScrollable(true);
+      if (albums.length > 3) {
+        setIsScrollable(true);
+      } else {
+        setIsScrollable(false);
+      }
     }
-  }, [hasBeenInView]);
+  }, [albums]);
+  usePreventVerticalScroll(".user-content__albums-container", isScrollable);
+
   return (
     <section className="user-content">
       {isPopUpPhotoVisible && (
@@ -49,7 +51,7 @@ export const UserContent = ({ albums, photos }: UserContentProps) => {
       <div className="container">
         <div className="user-content__inner">
           <div className="user-content__albums">
-            <p className="default-bold-text">Albums</p>
+            <p className="default-bold-text user-content__title">Albums</p>
             <div
               className="user-content__albums-container"
               onWheel={(event) => handleScroll(event)}
@@ -62,10 +64,7 @@ export const UserContent = ({ albums, photos }: UserContentProps) => {
                 });
 
                 return (
-                  <div
-                    key={index}
-                    ref={index === albums.length - 1 ? ref : undefined}
-                  >
+                  <div key={index}>
                     <Album album={album} preview={preview as PhotoResponse} />
                   </div>
                 );
@@ -76,7 +75,7 @@ export const UserContent = ({ albums, photos }: UserContentProps) => {
       </div>
       <div className="user-content__photos">
         <div className="container">
-          <p className="default-bold-text">All photos</p>
+          <p className="default-bold-text user-content__title">All photos</p>
         </div>
         <div>
           <PhotosGroup

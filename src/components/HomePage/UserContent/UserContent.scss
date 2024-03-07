@@ -11,6 +11,7 @@
         flex-wrap: nowrap;
         -ms-overflow-style: none;
         scrollbar-width: none;
+        max-width: 1200px;
 
         &::-webkit-scrollbar {
             display: none;
@@ -24,7 +25,7 @@
 
 }
 
-@media (max-width:1024px) {
+@media (max-width:1200px) {
     .user-content {
         &__photos {
             padding-top: 35px;
@@ -34,6 +35,18 @@
             padding-top: 10px;
             padding-right: 150px;
             width: 375px;
+        }
+    }
+}
+
+@media (max-width:375px) {
+    .user-content {
+        &__albums-container {
+            margin-left: 15px;
+        }
+
+        &__title {
+            margin-left: 15px;
         }
     }
 }

@@ -1,5 +1,5 @@
 .whats-your-email {
-    margin-top: 130px;
+    margin-top: 25vh;
 
     &__inner {
         display: flex;
@@ -17,11 +17,13 @@
     }
 
     &__privacy-policy {
-        padding-top: 210px;
+        position: absolute;
+        bottom: 50px;
         color: #262626;
         font-family: FuturaPtDefault;
         font-size: 16px;
         padding-bottom: 15px;
+        max-width: 420px;
 
         a {
             cursor: pointer;
@@ -33,14 +35,16 @@
     &__input {
         border: 1px solid #EEEEEE;
         background-color: #f4f4f4;
-        border-radius: 10rpx;  
+        border-radius: 10rpx;
     }
 }
 
-@media (max-width:1024px) {
+@media (max-width:1200px) {
     .whats-your-email {
         &__privacy-policy {
             font-size: 14px;
+            bottom: 80px;
+            left: 15px;
         }
     }
 }

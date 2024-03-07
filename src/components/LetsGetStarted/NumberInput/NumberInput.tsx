@@ -110,6 +110,7 @@ export const NumberInput = () => {
                   },
                 },
               }}
+              placeholder="(555) 555-5555"
             ></PhoneInput>
 
             <div className="number-input__button-container">
