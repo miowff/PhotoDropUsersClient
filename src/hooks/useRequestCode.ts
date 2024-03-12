@@ -8,7 +8,7 @@ export const useRequestCode = ({ setAlert }: Props) => {
   const [requestCode] = useRequestCodeMutation();
   const handleRequest = async (phoneNumber: string): Promise<void> => {
     const result = await requestCode(phoneNumber);
-    console.log(`Code:${result}`);
+    console.log(`Code:${result.data}`);
     if ("error" in result) {
       const { data } = result.error as FetchBaseQueryError;
       if (data) {
