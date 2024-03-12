@@ -9,7 +9,7 @@ export const useResendCode = ({ setAlert }: Props) => {
   const [requestCode] = useResendCodeMutation();
   const handleRequest = async (phoneNumber: string): Promise<void> => {
     const result = await requestCode(phoneNumber);
-    console.log(`Code:${result.data}`);
+    console.log(`Code:${JSON.stringify(result)}`);
     if ("error" in result) {
       const { data } = result.error as FetchBaseQueryError;
       if (data) {
